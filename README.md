@@ -14,15 +14,18 @@ Quick Jump to Topics:
 ### Core Android
 
 -   **What are SOLID Principles? How they are applicable in Android?**<br/>
-    A) SOLID unites all the best practices of software development over the years to deliver good quality apps. Understanding SOLID Principles will help us write clean and elegant code. It helps us write the code with SOC (Separation of Concerns).
-    SOLID Principles is an acronym for:
-    1. S stands for Single Responsibility Principle(SRP) - A class should have only one reason to change
-    2. O stands for Open Closed Principle - Software entities such as classes, functions, modules should be open for extension but closed for modification.
-    3. L stands for Liskov Substitution Principle - Derived class must be usable through the base class interface, without the need for user to know the difference.
-    4. I stands for Interface Segregation - No client should be forced to depend on methods that it doesn't use.
+    A) SOLID объединяет в себе все лучшие практики разработки программного обеспечения 
+    на протяжении многих лет для создания приложений хорошего качества. 
+    Понимание принципов SOLID поможет нам писать чистый и элегантный код. 
+    Это помогает нам писать код с помощью SOC (Separation of Concerns - разделение проблем). 
+    SOLID Principles - это аббревиатура от: 
+    1. S stands for Single Responsibility Principle(SRP) - У класса должна быть только одна причина для изменения 
+    2. O stands for Open Closed Principle - Программные объекты, такие как классы, функции, модули, должны быть открыты для расширения, но закрыты для модификации.
+    3. L stands for Liskov Substitution Principle - Производный класс должен использоваться через интерфейс базового класса, при этом пользователю не нужно знать разницу. 
+    4. I stands for Interface Segregation - Ни один клиент не должен зависеть от методов, которые он не использует. 
     5. D stands for Dependency Inversion - 
-       1. High Level Modules should not directly depend on Low level modules. Instead both should depend on abstractions.
-       2. Abstractions should not depend on details. Details should depend on abstractions.
+       1. Модули высокого уровня не должны напрямую зависеть от модулей низкого уровня. Вместо этого оба должны зависеть от абстракций.
+       2. Абстракции не должны зависеть от деталей. Детали должны зависеть от абстракций.
 
     [Learn More about SOLID principles with Android Examples Here.](https://www.coderefer.com/blog/solid-principles-in-android-with-kotlin-examples/)
 
@@ -38,15 +41,29 @@ Quick Jump to Topics:
     5) Widgets and Notifications
 
 -   **What is an Application class?**<br/>
-    A) An Application class is a base class in your Application that starts before all other classes like Activities or services are called. You can maintain your application's global state here. While it is NOT mandatory that you need to extend Application class, you can do so by providing your own implementation by creating a subclass and specifying the fully-qualified name of this subclass as the "android:name" attribute in your AndroidManifest.xml's <application> tag.
-
+    A) Класс приложения - это базовый класс в вашем приложении, 
+    который запускается до того, как будут вызваны все другие классы, 
+    такие как Activities или services. Здесь вы можете поддерживать глобальное состояние 
+    вашего приложения. Хотя расширение класса Application НЕ является обязательным, 
+    вы можете сделать это, предоставив собственную реализацию, создав подкласс и 
+    указав полное имя этого подкласса в качестве атрибута "android:name" 
+    в вашем файле AndroidManifest.xml <application> тег.
+    
 -   **What is a Context? What are different types of Contexts?**<br/>
-    A) As the name says, its the context of the current application or object. Context is like a handle to the environment your application is currently running in.
-    We mainly use two types of context. Application context - whose scope is throughout the application and Activity Context - whose scope depends on the Activity Lifecycle.
-
+    A) Как следует из названия, это контекст текущего приложения или объекта. 
+    Контекст похож на дескриптор среды, в которой в настоящее время работает ваше 
+    приложение.
+     В основном мы используем два типа контекста. 
+    Контекст Application, область действия которого распространяется на все 
+    приложение и контекст Activity, область действия которого зависит от 
+    жизненного цикла Activity.
 -   **What is an Activity?**<br/>
-    A) An activity provides the window in which the app draws its UI. This window typically fills the screen, but may be smaller than the screen and float on top of other windows. Generally, one activity implements one screen in an app. For instance, one of an app’s activities may implement a Preferences screen, while another activity implements a Select Photo screen.
-
+    A) Activity предоставляет окно, в котором приложение рисует свой 
+    пользовательский интерфейс. Это окно обычно заполняет экран, 
+    но может быть меньше экрана и располагаться поверх других окон. 
+    Как правило, одно Activity реализует один экран в приложении. 
+    Например, одно из действий приложения может реализовывать экран настроек, 
+    в то время как другое действие реализует экран выбора фотографии.
 -   **Activity Lifecycle**<br/>
     A)<br/>
     ![Activity Lifecycle Image](/assets/activity_lifecycle.png)
