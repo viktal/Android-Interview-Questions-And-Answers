@@ -19,7 +19,7 @@ Quick Jump to Topics:
     Понимание принципов SOLID поможет нам писать чистый и элегантный код. 
     Это помогает нам писать код с помощью SOC (Separation of Concerns - разделение проблем). 
     SOLID Principles - это аббревиатура от: 
-    1. S stands for Single Responsibility Principle(SRP) - У класса должна быть только одна причина для изменения 
+    1. S stands for Single Responsibility Principle(SRP) - У каждого элемента только одна зона ответственности 
     2. O stands for Open Closed Principle - Программные объекты, такие как классы, функции, модули, должны быть открыты для расширения, но закрыты для модификации.
     3. L stands for Liskov Substitution Principle - Производный класс должен использоваться через интерфейс базового класса, при этом пользователю не нужно знать разницу. 
     4. I stands for Interface Segregation - Ни один клиент не должен зависеть от методов, которые он не использует. 
@@ -82,16 +82,23 @@ Quick Jump to Topics:
     ![Activity Fragment Lifecycle](/assets/activity-fragment-lifecycles.png)
 
 -   **Is there any scenario where onDestoy() will be called without calling onPause() and onStop()?**<br/>
-    A) If we call finish() method inside onCreate() of our Activity, then onDestroy() will be called directly.
-
+    A) Если мы вызовем метод finish () внутри onCreate () нашей Activity, то onDestroy () будет вызываться напрямую.
 -   **How do we save and restore an activity's state during screen screen rotation?**<br/>
-    A) We can use onSavedInstanceState(bundle:Bundle) to save the activity's state inside a bundle. Then we can use onRestoreInstanceState(bundle) to restore the state of activity.
-
+    A) Мы можем использовать onSaveInstanceState (bundle: Bundle) для сохранения состояния активности внутри bundle. 
+    Затем мы можем использовать onRestoreInstanceState (bundle) для восстановления состояния активности.
 -   **What is a Loader in Android?**<br/>
-    A) Note: (Loader is Deprecated. We Have to use combination of ViewModels and LiveData instead of using Loaders) A Loader is used to fetch the data from a Content provider and cache the results across the configuration changes to avoid duplicate queries. Few implementations of Loaders like CursorLoader can implement an observer to monitor any data changes and can then trigger a reload.
-
+    A) Примечание. (Загрузчик устарел. Мы должны использовать комбинацию ViewModels и LiveData вместо использования загрузчиков). Загрузчик используется для получения данных от поставщика содержимого и кэширования результатов при изменении конфигурации, чтобы избежать дублирования запросов. Некоторые реализации загрузчиков, такие как CursorLoader, могут реализовывать наблюдателя для отслеживания любых изменений данных и затем запускать перезагрузку.
 -   **What is an Intent Filter?**<br/>
-    A) Intent filters are a very powerful feature of the Android platform. They provide the ability to launch an activity based not only on an explicit request, but also an implicit one. For example, an explicit request might tell the system to “Start the Send Email activity in the Gmail app". By contrast, an implicit request tells the system to “Start a Send Email screen in any activity that can do the job." When the system UI asks a user which app to use in performing a task, that’s an intent filter at work. Here's an example of how to declare Intent Filter in AndroidManifest:
+    A) Intent Filter - очень мощная функция платформы Android. 
+    Они предоставляют возможность запускать действие, основанное не только на 
+    явном запросе, но и на неявном. Например, явный запрос может указывать системе: 
+    «Запустить действие отправки электронной почты в приложении Gmail». 
+    В отличие от этого неявный запрос сообщает системе: 
+    «Запустить экран отправки электронной почты в любом действии, которое может 
+    выполнить эту работу». Когда пользовательский интерфейс системы спрашивает 
+    пользователя, какое приложение использовать для выполнения задачи, 
+    это срабатывает Intent Filter. Вот пример того, как объявить Intent Filter в 
+    AndroidManifest:    
     ```xml
     <activity android:name=".ExampleActivity" android:icon="@drawable/app_icon">
       <intent-filter>
@@ -104,219 +111,230 @@ Quick Jump to Topics:
 
 
 -   **What is an Intent?**<br/>
-    A) It is a kind of message or information that is passed to the components. It is used to launch an activity, display a web page, send SMS, send email, etc. There are two types of intents in android:
-    a)Implicit Intent
-    b)Explicit Intent
-
--   **What is AAPT?**<br/>
-    A) AAPT2 (Android Asset Packaging Tool) is a build tool that Android Studio and Android Gradle Plugin use to compile and package your app’s resources. AAPT2 parses, indexes, and compiles the resources into a binary format that is optimized for the Android platform.
-
+    A) Это своего рода сообщение или информация, которые передаются компонентам. Он используется для запуска активности, отображения веб-страницы, отправки SMS, отправки электронной почты и т. Д.
 -   **What are the different types of Intents?**<br/>
-    A) There are two types of intents:
-
-    Explicit intents specify which application will satisfy the intent, by supplying either the target app's package name or a fully-qualified component class name. You'll typically use an explicit intent to start a component in your own app, because you know the class name of the activity or service you want to start. For example, you might start a new activity within your app in response to a user action, or start a service to download a file in the background.
-    Implicit intents do not name a specific component, but instead declare a general action to perform, which allows a component from another app to handle it. For example, if you want to show the user a location on a map, you can use an implicit intent to request that another capable app show a specified location on a map.
-
+    A) There are two types of intents:  
+    * Явные намерения указывают, какое приложение будет удовлетворять намерение, 
+    путем предоставления либо имени пакета целевого приложения, либо полного имени 
+    класса компонента. Обычно вы будете использовать явное намерение для запуска 
+    компонента в собственном приложении, потому что вам известно имя класса действия 
+    или службы, которую вы хотите запустить. Например, вы можете запустить новое 
+    действие в своем приложении в ответ на действие пользователя или запустить службу 
+    для загрузки файла в фоновом режиме.  
+    * Неявные намерения не именуют конкретный компонент, а вместо этого объявляют 
+    общее действие, которое необходимо выполнить, что позволяет компоненту из другого 
+    приложения обрабатывать его. Например, если вы хотите показать пользователю 
+    местоположение на карте, вы можете использовать неявное намерение, чтобы запросить 
+    у другого совместимого приложения указанное местоположение на карте.
+    
+    **What is AAPT?**<br/>
+    A) AAPT2 (Android Asset Packaging Tool) - это инструмент сборки, 
+    который Android Studio и Android Gradle Plugin используют для компиляции и 
+    упаковки ресурсов вашего приложения. AAPT2 анализирует, индексирует и 
+    компилирует ресурсы в двоичный формат, оптимизированный для платформы Android.
+-   
 -   **What is HandlerThread?**<br/>
-    A) HandlerThread is a Handy class to start a thread that has a Looper.
+    A) HandlerThread - это удобный класс для запуска потока с Looper.
 
 -   **What is a Looper?**<br/>
-    A) A Looper is a class used to loop through the Message Queue attached to the Thread. Any thread consists of only one looper.
-    
-    You can access message queue of current thread by using **Looper.myQueue()**.
-    
-    By default, a thread halts when the execution completes. But, for Example, if we take Android's Main thread, it should not halt upon execution.
-
-    Normally thread cannot be reused once its job is completed. But thread with Looper is kept alive until you call quit method so you don’t need to create a new instance each time you want to run a job in background.
-
-    Rather it should loop through the runnables(Messages) that its assigned in order to work properly. For more info, refer to this [link](https://stackoverflow.com/a/34522758/3424919).
-
+    A) Looper - это класс, используемый для циклического прохождения очереди сообщений, прикрепленной к потоку. Любой поток состоит только из одного лупера.
+    Вы можете получить доступ к очереди сообщений текущего потока, используя **Looper.myQueue()**.
+   По умолчанию поток останавливается после завершения выполнения. Но, например, если 
+    мы возьмем основной поток Android, он не должен останавливаться при выполнении.
+   Обычно поток не может быть повторно использован после завершения его работы. 
+    Но поток с Looper остается активным до тех пор, пока вы не вызовете метод quit, 
+    поэтому вам не нужно создавать новый экземпляр каждый раз, когда вы хотите 
+    запустить задание в фоновом режиме.
+   Скорее, он должен проходить через исполняемые файлы (сообщения), которые ему 
+    назначены, чтобы работать должным образом. Для получения дополнительной 
+    информации обратитесь к этой [link](https://stackoverflow.com/a/34522758/3424919).
 -   **What is a Message Queue?**<br/>
-    A) MessageQueue is a queue that has list of messages which should be processed. Android maintains a MessageQueue on the main thread.
+    A) MessageQueue - это очередь со списком сообщений, которые необходимо обработать. Android поддерживает MessageQueue в основном потоке.
     [More Info](https://medium.com/@ankit.sinhal/messagequeue-and-looper-in-android-3a18c7fc9181)
 
 -   **What is a Message ?**<br/>
-    A) Message contains a description and arbitrary data object that can be sent to a Handler. Basically its used to process / send some data across threads.
-
+    A) Сообщение содержит описание и произвольный объект данных, который может быть отправлен обработчику. В основном он используется для обработки / отправки некоторых данных по потокам.
 -   **What is a Service?**<br/>
-    A) A service is a component which doesn't have UI and can perform long running operations like downloading stuff, playing music etc.. which can run even exiting the application. By default service runs on main thread. This might cause ANR errors. To avoid this, we can Start service by creating a new background thread or use an IntentService that can do work in background. [Read More.](https://developer.android.com/guide/components/services)
-
+    A) Service - это компонент, у которого нет пользовательского интерфейса и который может выполнять длительные операции, такие как загрузка файлов, воспроизведение музыки и т. Д., Которые могут выполняться даже при выходе из приложения. По умолчанию служба работает в основном потоке. Это может вызвать ошибки ANR. Чтобы избежать этого, мы можем запустить службу, создав новый фоновый поток или используя IntentService, который может работать в фоновом режиме. [Подробнее.](Https://developer.android.com/guide/components/services)
 -   **How to Stop a Service?**<br/>
-    A) To stop a service from an activity we can call stopService(Intent intent) method. To Stop a service from itself, we can call stopSelf() method.
-
+    A) Чтобы остановить службу от активности, мы можем вызвать метод stopService (Intent intent). Чтобы остановить службу от самой себя, мы можем вызвать метод stopSelf ().
 -   **What are different types of services?**<br/>
     A) These are the three different types of services:
 
     **Foreground Service:**
-    A foreground service performs some operation that is noticeable to the user. For example, an audio app would use a foreground service to play an audio track. Foreground services must display a Notification. Foreground services continue running even when the user isn't interacting with the app. <br/>
+    Служба переднего плана выполняет некоторую операцию, заметную для пользователя. Например, звуковое приложение будет использовать службу переднего плана для воспроизведения звуковой дорожки. Службы переднего плана должны отображать уведомление. Службы переднего плана продолжают работать, даже если пользователь не взаимодействует с приложением. <br/>
     **Background Service:**
-    A background service performs an operation that isn't directly noticed by the user. For example, if an app used a service to compact its storage, that would usually be a background service. However there are restrictions to use background services from Android API 26 and above. We can use WorkManager to defer these background tasks.<br/>
+    Фоновая служба выполняет операцию, которая напрямую не замечается пользователем. Например, если приложение использует службу для сжатия своего хранилища, обычно это фоновая служба. Однако существуют ограничения на использование фоновых служб из Android API 26 и выше. Мы можем использовать WorkManager, чтобы отложить выполнение этих фоновых задач. <br/>
     **Bound Service:**
-    A service is bound when an application component binds to it by calling bindService(). A bound service offers a client-server interface that allows components to interact with the service, send requests, receive results, and even do so across processes with interprocess communication (IPC). A bound service runs only as long as another application component is bound to it. Multiple components can bind to the service at once, but when all of them unbind, the service is destroyed by the system.
+    Служба привязывается, когда компонент приложения привязывается к ней, вызывая bindService (). Связанная служба предлагает интерфейс клиент-сервер, который позволяет компонентам взаимодействовать со службой, отправлять запросы, получать результаты и даже делать это между процессами с межпроцессным взаимодействием (IPC). Связанная служба работает только до тех пор, как другой компонент приложения привязан к нему. Несколько компонентов могут быть привязаны к службе одновременно, но когда все они отключаются, служба уничтожается системой.
     [Read More](https://developer.android.com/guide/components/services#Types-of-services)
 
 -   **Bound Service vs UnBounded service?**<br/>
-    A) A Bound service is started by using method bindService(). As mentioned above system destroys bound service when no application component is accessing it.
-    Unbounded service (started service) is started by using a method called startService(). Once started, it will run indefinitely even if the application component that started it is destroyed.
-
+    A) Связанная служба запускается с помощью метода bindService (). Как упоминалось выше, система уничтожает связанную службу, когда к ней не обращается ни один компонент приложения.  
+       UnBounded служба (запущенная служба) запускается с помощью метода startService (). После запуска он будет работать бесконечно, даже если компонент приложения, запустивший его, будет уничтожен.
+    
 -   **When does a Bound Service stops?**<br/>
-    A) A Bound Service will stop automatically by the system when all the Application Components bound to it are unbinded.
-
--   **What is the difference between START_NOT_STICKY, START_STICKY AND START_REDELIVER_INTENT?**<br/>
+    A) Связанная служба будет автоматически остановлена системой, когда все привязанные к ней компоненты приложения перестанут слушать.  <br/><br/>
+    
+    **What is the difference between START_NOT_STICKY, START_STICKY AND START_REDELIVER_INTENT?**<br/>
     A) **START_NOT_STICKY:**<br/>
-    If the system kills the service after onStartCommand() returns, do not recreate the service unless there are pending intents to deliver. This is the safest option to avoid running your service when not necessary and when your application can simply restart any unfinished jobs.<br/>
+    Если система убивает службу после onStartCommand (), то она не воссоздают службу, если нет ожидающего намерения. Это самый безопасный вариант, позволяющий избежать запуска вашей службы, когда в ней нет необходимости, и когда ваше приложение может просто перезапустить любые незавершенные задания. <br/>
     **START_STICKY:**<br/>
-    If the system kills the service after onStartCommand() returns, recreate the service and call onStartCommand(), but do not redeliver the last intent. Instead, the system calls onStartCommand() with a null intent unless there are pending intents to start the service. In that case, those intents are delivered. This is suitable for media players (or similar services) that are not executing commands but are running indefinitely and waiting for a job.<br/>
+    Если система завершает работу службы после возврата из onStartCommand (), то она воссоздает службу и вызывает onStartCommand (), но повторно не отправляет последний интенд. Вместо этого система вызывает onStartCommand () с нулевым интендом, если нет ожидающих интендов запустить службу. В этом случае эти намерения будут доставлены. Это подходит для медиаплееров (или аналогичных служб), которые не выполняют команды, но работают бесконечно и ждут задания. <br/>
     **START_REDELIVER_INTENT:**<br/>
-    If the system kills the service after onStartCommand() returns, recreate the service and call onStartCommand() with the last intent that was delivered to the service. Any pending intents are delivered in turn. This is *suitable for services that are actively performing a job that should be immediately resumed, such as downloading a file.*
+    Если система завершает работу службы после возврата из onStartCommand (), то она воссоздает службу и вызывает onStartCommand () с последним интендом, которое было доставлено сервису. Любые ожидающие интенды доставляются по очереди. Это подходит для служб, которые активно выполняют работу, которая должна быть немедленно возобновлена, например, загрузка файла. 
+    
 
 -   **What is Pending Intent?**<br/>
-    A)A PendingIntent is a token that you give to a foreign application (e.g. NotificationManager, AlarmManager, Home Screen AppWidgetManager, or other 3rd party applications), which allows the foreign application to use your application's permissions to execute a predefined piece of code. It specifies a task that requires to be performed in future.
-
+    A)Ожидающее намерение - это токен, который вы даете внешнему приложению 
+    (например, NotificationManager, AlarmManager, Home Screen AppWidgetManager или 
+    другим сторонним приложениям), который позволяет стороннему приложению 
+    использовать разрешения вашего приложения для выполнения заранее определенного 
+    фрагмента кода. Он определяет задачу, которую необходимо выполнить в будущем.
 -   **What is an Intent Service?**<br/>
-    A) IntentService is a subclass of Service that can perform tasks using worker thread unlike service that blocks main thread.
-
+    A) IntentService - это подкласс службы, который может выполнять задачи с использованием рабочего потока, в отличие от сервисов, которые блокирует основной поток.
 -   **What is the method that differentiates it to make Service run in background?**<br/>
-    A) onHandleIntent() is the method that helps the IntentService to run a particular code block declared inside it, in worker/background thread.
-
+    A) onHandleIntent () - это метод, который помогает IntentService запускать определенный блок кода, объявленный внутри него, в рабочем / фоновом потоке.
 -   **How to Stop an IntentService?**<br/>
-    A) An IntentService automatically stops itself after its job is done. We do not need to explicitly call any methods to stop an IntentService unlike Service which requires stopSelf() or StopService(intent:Intent).
-
+    A) IntentService автоматически останавливается после выполнения своей работы. Нам не нужно явно вызывать какие-либо методы для остановки IntentService, в отличие от Service, для которого требуется stopSelf () или StopService(intend: Intend).
 -   **When Intent Service is Useful?**<br/>
-    A) The IntentService can be used in long tasks usually with no communication to Main Thread. If communication is required, can use Main Thread handler or broadcast intents. Another case of use is when callbacks are needed (Intent triggered tasks).
-
+    A) IntentService может использоваться в длинных задачах, обычно без связи с основным потоком. Если требуется связь, можно использовать обработчик основного потока или широковещательные намерения. Другой случай использования - когда необходимы обратные вызовы (задачи, запускаемые намерением).
 -   **Advantage of Retrofit over Volley?**<br/>
-    A) Retrofit is type-safe. Type safety means that the compiler will validate reques and response object's variable types while compiling, and throw an error if you try to assign the wrong type to a variable.
-
+    A) Retrofit типобезопасный. Безопасность типов означает, что компилятор будет проверять запросы и типы переменных объекта ответа во время компиляции и выдает ошибку, если вы пытаетесь присвоить переменной неправильный тип.
 -   **Advantage of Volley over Retrofit?**<br/>
-    A) Android Volley has a very elaborate and flexible cache mechanism. When a request is made through Volley, first the cache is checked for Response. If it is found, then it is fetched and parsed, else, it will hit Network to fetch the data. Retrofit does not support cache by default.
+    A) Android Volley имеет очень продуманный и гибкий механизм кеширования. Когда запрос сделан через Volley, сначала кеш проверяется на Response. Если он найден, он извлекается и анализируется, в противном случае он обращается к сети для извлечения данных. По умолчанию дооснащение не поддерживает кеширование.
+
 
 -   **What are different launch modes available in Android?**<br/>
-    A) There are four launch modes for an Activity in Android as follows:
-
-    1) <b>standard</b> : Creates a new instance of an activity in the task from which it is started every single time. It is the default mode if not declared. 
-    <br/>Eg: If we have an activity stack of A->B->C, If we launch Activity C again using standard Mode, the activity stack will now be A->B->C->C. We can see that two instances of C are present in the activity stack.
-
-    1) <b>singleTop</b> : Same as standard except that if the activity is at the top of the stack, then the same instance will be used. Now the existing Activity at the top will receive the intent through a call to its onNewIntent() method.
-     <br/>Eg: If we have an activity stack of A->B->C, If we launch Activity C again using singleTop Mode, the activity stack remains to be A->B->C. However if we launch B, then B will be added as new Instance to the stack (A->B->C->B).
-
-    2) <b>singleTask</b> : A new task will be created and activity will be created at the root of this new task whenever we use launch mode as singleTask. However, if there is already a separate task with same instance, the system will call that activity's onNewIntent() method to route the intent. There can only be one instance of activity existing at a time.
-    <br/>Eg: If our activity stack is A->B->C and if we launch D using singleTask, it will be A->B->C->[D]. Here braces represents the stack in separate task. If we call E using standard mode, then it will be A->B->C->[D->E].<br/>
-    If we have A->B->C and if we call B again using singleTask launch Mode, the stack will now be A->[B] with B in a separate task. Activity C will be destroyed.
-
-    1) <b>singleInstance</b> : Same as Single Task except it creates a new activity in a task and no other activities can then launched into that task. That task will forever contains only that activity. If we use standard or singleTop to launch another activities, they are launched into another tasks.
-    <br/>Eg: if the Activity stack is A->B and now we launched C using singleInstance Launch Mode, the new stack will be A->B->[C]. Now if we call a new activity D from C, it will be launched into separate task. Now the new stack will be A->B->[C]->[D].  Now if we launch E from activity B, Then new stack will be A->B->E [C]->[D]. If we call C again, onNewIntent() of C will be called and new stack will be A->B->E->[C] [D].
-
+    A) Существует четыре режима запуска Activity в Android, а именно:
+    1) <b>standard</b> : Создает новый экземпляр операции в задаче, из которой она запускается каждый раз. Если не объявлен, это режим по умолчанию.
+     <br/> Например: если у нас есть стек действий A-> B-> C, если мы снова запустим действие C в стандартном режиме, стек действий теперь будет A-> B-> C-> C. Мы видим, что в стеке действий присутствуют два экземпляра C.
+       
+    1) <b>singleTop</b> : То же, что и стандарт, за исключением того, что если действие находится наверху стека, будет использоваться тот же экземпляр. Теперь существующее действие вверху получит намерение через вызов своего метода onNewIntent ().
+      <br/> Например: если у нас есть стек активности A-> B-> C, если мы снова запустим Activity C в режиме singleTop, стек активности останется A-> B-> C. Однако, если мы запустим B, то B будет добавлен как новый экземпляр в стек (A-> B-> C-> B).
+       
+    2) <b>singleTask</b> : Будет создана новая задача, и действие будет создаваться в корне этой новой задачи всякий раз, когда мы используем режим запуска как singleTask. Однако, если уже существует отдельная задача с таким же экземпляром, система вызовет метод этого действия onNewIntent () для маршрутизации намерения. Одновременно может существовать только один экземпляр активности.
+     <br/> Например: если наш стек действий - A-> B-> C и если мы запустим D с помощью singleTask, это будет A-> B-> C -> [D]. Здесь фигурные скобки представляют стек в отдельной задаче. Если мы вызываем E в стандартном режиме, то это будет A-> B-> C -> [D-> E]. <br/>
+     Если у нас есть A-> B-> C и если мы снова вызовем B, используя режим запуска singleTask, стек теперь будет A -> [B] с B в отдельной задаче. Действие C будет уничтожено.
+       
+    1) <b>singleInstance</b> : То же, что и отдельная задача, за исключением того, что в задаче создается новое действие, и никакие другие действия не могут быть запущены в этой задаче. Эта задача навсегда будет содержать только эту деятельность. Если мы используем стандартные или singleTop для запуска других действий, они запускаются в другие задачи.
+     <br/> Например: если стек Activity - A-> B и теперь мы запустили C, используя режим запуска singleInstance, новый стек будет A-> B -> [C]. Теперь, если мы вызовем новую активность D из C, она будет запущена в отдельную задачу. Теперь новый стек будет A-> B -> [C] -> [D]. Теперь, если мы запустим E из действия B, тогда новый стек будет A-> B-> E [C] -> [D]. Если мы вызовем C снова, будет вызван onNewIntent () of C, и новый стек будет A-> B-> E -> [C] [D].
+       
     You can read more about them [here](https://developer.android.com/guide/components/activities/tasks-and-back-stack#ManifestForTasks).
 
 -   **How do you declare the launch mode in your application?**<br/>
-    A) via manifest, in activity's tag. For Eg., -> android:launchMode="singleTask"
-
+    A) через манифест в теге активности. Например, -> android: launchMode = "singleTask"
 
 -   **How to handle crashing of AsyncTask during screen rotation?**<br/>
-    A) 
-    One way is by cancelling the AsyncTask by using cancel() method on its instance. It will call onCancelled() method of AsyncTask where we can do some clean-up activities like hiding progress bar etc.
-    The best way to handle AsyncTask crash is to create a RetainFragment, i.e., a fragment without UI as shown in the gist below: https://gist.github.com/vamsitallapudi/26030c15829d7be8118e42b1fcd0fa42
-    We can also avoid this crash by using RxJava instead of AsyncTask as we will be subscribing and unsubscribing at onResume() and onPause() methods respectively. We can alternatively use activity's lifecycle aware component - LiveData.
-
+    A)Один из способов - отменить AsyncTask, используя метод cancel () для его экземпляра. Он вызовет метод onCancelled () AsyncTask, где мы сможем выполнить некоторые действия по очистке, такие как скрытие индикатора выполнения и т. Д.
+     Лучший способ справиться со сбоем AsyncTask - создать RetainFragment, то есть фрагмент без пользовательского интерфейса, как показано в приведенной ниже сути: https://gist.github.com/vamsitallapudi/26030c15829d7be8118e42b1fcd0fa42
+     Мы также можем избежать этого сбоя, используя RxJava вместо AsyncTask, поскольку мы будем подписываться и отказываться от подписки в методах onResume () и onPause () соответственно. В качестве альтернативы мы можем использовать компонент, учитывающий жизненный цикл активности - LiveData.
 -  **What is a RetainFragment?**<br/>
-    Generally, Fragments are destroyed and recreated along with their parent Activity’s whenever a configuration change occurs. Calling setRetainInstance(true) allows us to bypass this destroy-and-recreate cycle, notifying the system to retain the current instance of the fragment when the activity is recreated.
-
+    Как правило, фрагменты уничтожаются и воссоздаются вместе со своими родительскими Activity всякий раз, когда происходит изменение конфигурации. Вызов setRetainInstance (true) позволяет нам обойти этот цикл уничтожения и воссоздания, уведомляя систему о необходимости сохранения текущего экземпляра фрагмента при воссоздании действия.
 -  **Difference between serializable and parcelable? Why android introduced Parcelable?**<br/>
-    A) Serializable uses reflection while for parcelable, developers from android team wrote custom code that performs manual marshalling(converting data into byte stream) and unmarshalling(converting the byte stream back to their original data). Usually Parcelable is considered faster than Serializable.
-
+    A) Serializable использует отражение, а для parcelable разработчики из команды Android написали собственный код, который выполняет ручную сортировку (преобразование данных в поток байтов) и демаршалинг (преобразование потока байтов обратно в исходные данные). Обычно Parcelable считается быстрее, чем Serializable.
 -  **What is Reflection?**<br/>
-    A) Reflection is an API that is used to examine or modify the behaviour of methods, classes and interfaces at runtime. The required classes for reflection are present in java.lang.reflect package.
-
+    A) Отражение - это API, который используется для проверки или изменения поведения методов, классов и интерфейсов во время выполнения. Необходимые классы для отражения присутствуют в пакете java.lang.reflect.
 -  **How to reduce your app size?**<br/>
     A)
-    1. setting minifyEnabled to true
-    2. setting shrinkResources to true
-    3. using bundle instead of apk in developer console
-    4. converting the images to vector drawables.
+     1. установка minifyEnabled в значение true
+     2. установка shrinkResources в true
+     3. использование пакета вместо apk в консоли разработчика
+     4. преобразование изображений в векторные чертежи.
 
 -   **What is the advantage of using Retrofit over AsyncTask?**<br/>
-    A) Retrofit reduces boiler plate code by internally using GSON library which helps parsing the json file automatically.
-    Retrofit is a type safe library. This means - it checks if wrong data type is assigned to variables at compilation time itself.
-    More use-cases at: https://stackoverflow.com/a/16903205/3424919
+    A) Retrofit сокращает количество стандартного кода за счет внутреннего использования библиотеки GSON, которая помогает автоматически анализировать файл json.
+     Retrofit - это типобезопасная библиотека. Это означает - он проверяет, не присвоен ли неправильный тип данных переменным во время самой компиляции.    More use-cases at: https://stackoverflow.com/a/16903205/3424919
 
 -   **How to handle multiple network calls using Retrofit?**<br/>
-      A) In Retrofit, we can call the operations asynchronously by using enqueue() method where as to call operations synchronously, we can use execute() method. In addition, we can use zip() operator from RxJava to perform multiple network calls using Retrofit library.
-
+      A) В Retrofit мы можем вызывать операции асинхронно, используя метод enqueue (), а для синхронного вызова операций мы можем использовать метод execute (). Кроме того, мы можем использовать оператор zip () из RxJava для выполнения нескольких сетевых вызовов с использованием библиотеки Retrofit.
 -   **What is the role of Presenter in MVP?**<br/>
-    A) The Presenter is responsible to act as the middle man between View and Model. It retrieves data from the Model and returns it formatted to the View. But unlike the typical MVC, it also decides what happens when you interact with the View.
-
+    A) Presenter должен действовать как посредник между view и моделью. 
+    Он извлекает данные из модели и возвращает их в формате view. Но в отличие от 
+    типичного MVC, он также решает, что происходит, когда вы взаимодействуете с view.
 -   **What is the advantage of MVVM over MVP?**<br/>
-    A) In MVP, Presenter is responsible for view data updates as well as data operations where as in MVVM, ViewModel does not hold any reference to View. It is the View's responsibility to pick the changes from ViewModel. This helps in writing more maintainable test cases since ViewModel does not depend upon View.
-
+    A) В MVP Presenter отвечает за обновления данных просмотра, а также операции с данными, где, как и в MVVM, ViewModel не содержит никаких ссылок на View. Выбор изменений из ViewModel является обязанностью View. Это помогает в написании более удобных в обслуживании тестовых случаев, поскольку ViewModel не зависит от View.
 -    **When to use AsyncTask and when to use services?**<br/>
-    A) Services are useful when you want to run code even when your application's Activity isn't open. AsyncTask is a helper class used to run some code in a separate thread and publish results in main thread. Usually AsyncTask is used for small operations and services are used for long running operations.
-
+    A) services полезны, когда вы хотите запускать код, даже когда Activity вашего 
+     приложения не открыта. AsyncTask - это вспомогательный класс, используемый для 
+     запуска некоторого кода в отдельном потоке и публикации результатов в основном 
+     потоке. Обычно AsyncTask используется для небольших операций, а services - для 
+     длительных операций.
 -    **When to use a service and when to use a thread?**<br/>
-    A) We will use a Thread when we want to perform background operations when application is running in foreground. We will use a service even when the application is not running.
-
+    A) Мы будем использовать поток, когда хотим выполнять фоновые операции, когда 
+     приложение работает на переднем плане. Мы будем использовать service, даже 
+     если приложение не запущено.
 -   **What is a Handler?**<br/>
-    A) A Handler allows you to send and process Message and Runnable objects associated with a thread's MessageQueue. Each Handler instance is associated with a single thread and that thread's message queue. When you create a new Handler, it is bound to the thread / message queue of the thread that is creating it -- from that point on, it will deliver messages and runnables to that message queue and execute them as they come out of the message queue. We will generally use handler class when we want to repeat task every few seconds.
-
+    A) Обработчик позволяет отправлять и обрабатывать объекты Message и Runnable, 
+    связанные с MessageQueue потока. Каждый экземпляр Handler связан с одним потоком и 
+    очередью сообщений этого потока. Когда вы создаете новый обработчик, он 
+    привязывается к потоку / очереди сообщений потока, который его создает - 
+    с этого момента он будет доставлять сообщения и исполняемые файлы в эту очередь 
+    сообщений и выполнять их по мере выхода из очереди сообщений. Обычно мы будем 
+    использовать класс обработчика, когда хотим повторять задачу каждые несколько секунд.
 -   **How to save password safely in Android?**<br/>
     A) Using Android Keystore<br/>
     <https://medium.com/@josiassena/using-the-android-keystore-system-to-store-sensitive-information-3a56175a454b>
 
 -  **What is Alarm Manager?**<br/>
-    A) AlarmManager is a class which helps scheduling your Application code to run at some point of time or at particular time intervals in future. When an alarm goes off, the Intent that had been registered for it is broadcast by the system, automatically starting the target application if it is not already running. Registered alarms are retained while the device is asleep (and can optionally wake the device up if they go off during that time), but will be cleared if it is turned off and rebooted.
-
+    A) AlarmManager - это класс, который помогает планировать запуск кода вашего 
+   приложения в определенный момент времени или через определенные промежутки времени 
+   в будущем. Когда срабатывает alarm, intend, который был зарегистрирован 
+   для него, транслируется системой, автоматически запуская целевое приложение, 
+   если оно еще не запущено. Зарегистрированные сигналы сохраняются, 
+   пока устройство находится в спящем режиме (и может дополнительно разбудить 
+   устройство, если они сработают в течение этого времени), но будут сброшены, 
+   если оно будет выключено и перезагружено.
 -   **How can I get continuous location updates in android like in Google Maps?**<br/>
-    A) We can use Fused location provider in Android set our interval in that.
+-   **Как я могу получать постоянные обновления местоположения в Android, как в Google Maps?**<br/>
+    A) Мы можем использовать провайдер местоположения Fused в Android, чтобы установить в нем наш интервал.
     https://stackoverflow.com/a/41500910/3424919
 
 
 ### Android Security Related
 -   **How do you know if the device is rooted?**<br/>
-    A) We can check if superUser apk is installed in the device or if it contains su file or xbin folder. Alternatively you can use RootBeer library available in GitHub.
-    <br/>
+    A) Мы можем проверить, установлен ли на устройстве apk superUser или он содержит файл su или папку xbin. В качестве альтернативы вы можете использовать библиотеку RootBeer, доступную в GitHub.    <br/>
     For code part, click [Here](https://stackoverflow.com/a/35628977/3424919).
 -   **What is Symmetric Encryption?**<br/>
-    A) Symmetric encryption deals with creating a passphrase and encrypting the file with it. Then the server needs to send the key to the client so that the client can decrypt. Here the problem is sending that key to decrypt the file. If Hackers can access that key, they can misuse the data.
+    A) Симметричное шифрование занимается созданием парольной фразы и шифрованием файла с ее помощью. Затем серверу необходимо отправить ключ клиенту, чтобы клиент мог расшифровать. Здесь проблема заключается в отправке этого ключа для расшифровки файла. Если хакеры могут получить доступ к этому ключу, они могут неправильно использовать данные.
 -   **What is Asymmetric Encryption?**<br/>
-    A) Using algorithms like RSA, the server generates 2 keys - public key and private key. The server then gives public key to clients. Client then encrypts the sensitive data with that public key and send it back to server. Now as the server alone has the private key, only it can decrypt the data. This is the most efficient way of sending data across the client and server.
-    <br/>
-    Example of this Asymmetric encryption are HTTPS using SSL certificate, Bitcoin, etc.
+    A) Используя такие алгоритмы, как RSA, сервер генерирует 2 ключа - открытый ключ и закрытый ключ. Затем сервер выдает клиентам открытый ключ. Затем клиент шифрует конфиденциальные данные этим открытым ключом и отправляет их обратно на сервер. Теперь, когда закрытый ключ есть только у сервера, только он может расшифровать данные. Это наиболее эффективный способ отправки данных между клиентом и сервером.
+     <br/>
+     Примером этого асимметричного шифрования являются HTTPS с использованием сертификата SSL, биткойн и т. Д.
     For more info, refer to this [video](https://youtu.be/AQDCe585Lnc)
 
 
 ### Android Battery Related
 -   **How do you reduce battery consumption?**<br/>
     A) 
-    1. Never poll the server for updates.
-    2. Sync only when required. Ideally, sync when phone is on Wi-Fi and plugged in.
-    3. Defer your work using WorkManager.
-    4. Compress your data
-    5. Defer non immediate requests until the phone is plugged in or wifi is turned on. The Wi-Fi radio uses significantly less battery than the mobile radio.
-
+     1. Никогда не опрашивайте сервер на предмет обновлений.
+     2. Синхронизируйте только при необходимости. В идеале выполняйте синхронизацию, когда телефон подключен к сети Wi-Fi и подключен к сети.
+     3. Отложите свою работу с помощью WorkManager.
+     4. Сожмите свои данные.
+     5. Отложите немедленные запросы до тех пор, пока телефон не будет подключен или не будет включен Wi-Fi. Радио Wi-Fi потребляет значительно меньше батареи, чем мобильное радио.
 
 -   **How do you improve battery while fetching location for an app?**<br/>
     A) 
-    1. By changing Accuracy -> we can use setPriority() to PRIORITY_LOW_POWER
-    2. By changing Frequency of fetching location -> we can use setInterval() to specify the time interval
-    3. By increasing latency -> After our call, we can wait for longer time - we can use setMaxWaitTime() to set large timeout.
-   
+     1. Изменив точность -> мы можем использовать setPriority () на PRIORITY_LOW_POWER.
+     2. Изменив частоту получения местоположения -> мы можем использовать setInterval (), чтобы указать временной интервал.
+     3. Увеличивая задержку -> После нашего вызова мы можем ждать дольше - мы можем использовать setMaxWaitTime () для установки большого тайм-аута.   
 
 
 ### Dagger 2 Related Questions:
 
 -   **What is Dependency Injection Pattern?**<br/>
-    A) Dependency Injection pattern is where if our object requires other object, it will be passed to our object instead of us having to create that object. This other object is called as dependency.
-
+    A) Шаблон внедрения зависимостей - это то место, где, если нашему объекту требуется другой объект, он будет передан нашему объекту вместо того, чтобы нам нужно было создавать этот объект. Этот другой объект называется зависимостью.
 -   **What is Service Locator Pattern?**<br/>
-    A) Service Locator Pattern uses central Registry known as Service Locator which upon request provides objects for our class. This pattern has severe criticism that its an Anti-Pattern.
-
+    A) Шаблон Service Locator использует центральный реестр, известный как Service Locator, который по запросу предоставляет объекты для нашего класса. Этот шаблон подвергается серьезной критике за то, что он является анти-шаблоном.
 -   **What is Anti-Pattern?**<br/>
-    A) An anti-pattern are certain patterns in software development that are considered bad programming practices.<br/>
+    A) Антишаблон - это определенные шаблоны в разработке программного обеспечения, которые считаются плохой практикой программирования. <br/>
     For more, click [Here](https://stackoverflow.com/a/980616/3424919).
 
 -   **What is the use-case of @BindsInstance Annotation?**<br/>
-    A) @BindsInstance is used to bind the available data at the time of building the Component. For example, while I needed to build dagger graph and username is already available to me, then I can bind that username to that dagger dependency graph as follows:
-    
+    A) @BindsInstance используется для привязки доступных данных во время создания 
+    Компонента. Например, хотя мне нужно было построить dagger граф и имя пользователя 
+    уже доступно мне, я могу привязать это имя пользователя к этому dagger графу 
+    зависимостей следующим образом:    
     ```java
         @Component.Builder
         interface Builder {
@@ -327,38 +345,31 @@ Quick Jump to Topics:
 
 
 -   **What is the use-case of @Module Annotation?**<br/>
-    A) @Module is the Annotation used on the class for the Dagger to look inside it, to provide dependencies. We may be declaring methods inside the module class that are enclosed with @Provides annotation.
-
+    A) @Module - это аннотация, используемая в классе для того, чтобы Dagger заглядывал внутрь него и предоставлял зависимости. Мы можем объявлять методы внутри класса модуля, которые заключены в аннотацию @Provides.
 -   **What is the use-case of @Provides Annotation?**<br/>
-    A) @Provides annotation is used on a method in Module class and can return / provide a Dependency object.
-
+    A) Аннотация @Provides используется для метода в классе Module и может возвращать / предоставлять объект Dependency.
 -   **What is the use-case of @Component Annotation?**<br/>
-    A) @Component is used on Interface or abstract class. Dagger uses this interface to generate an implementation class with fully formed, dependency injected implementation, using the modules declared along with it. This generated class will be preceded by Dagger. For example if i create an interface named ProgramComponent with @Component annotation, Dagger will generate a Class named 'DaggerProgramComponent' implementing the  ProgramComponent interface.
-
+    A) @Component используется в интерфейсе или абстрактном классе. Dagger использует этот интерфейс для создания класса реализации с полностью сформированной реализацией с внедрением зависимостей, используя модули, объявленные вместе с ним. Этому сгенерированному классу будет предшествовать Dagger. Например, если я создаю интерфейс с именем ProgramComponent с аннотацией @Component, Dagger сгенерирует класс с именем DaggerProgramComponent, реализующий интерфейс ProgramComponent.
 -   **What is the use-case of @Scope Annotation?**<br/>
-    A) @Scope is an annotation used on Interface to create a new Custom Scope. A Scope declaration helps to keep single instance of a class as long as its scope exists. For example, in Android, we can use @ApplicationScope for the object to live as long as the Application is live or @ActivityScope for the object to be available till the activity is killed.
-
+    A) @Scope - это аннотация, используемая в интерфейсе для создания new Custom Scope. Объявление Scope помогает сохранить единственный экземпляр класса, пока существует его область видимости. Например, в Android мы можем использовать @ApplicationScope, чтобы объект существовал, пока приложение работает, или @ActivityScope, чтобы объект был доступен до тех пор, пока действие не будет уничтожено.
 -   **What is the use of Qualifier in Dagger?**<br/>
-    A) We are often in a situation where we will be needing multiple objects with different instance values. For example, we need declare Student("Vamsi") and Student("Krishna"). In such case we can use a Qualifier to tell Dagger that we need multiple instances of same class. The default implementation of Qualifier is using @Named annotation, for eg., @Named("student_vamsi") and @Named("student_krishna")
-    If we want to create a Custom Qualifier we would be using @Qualifier to declare a custom Qualifier interface.
-
+    A) Мы часто оказываемся в ситуации, когда нам потребуется несколько объектов с разными значениями экземпляра. Например, нам нужно объявить Студента («Вамси») и Студента («Кришна»). В таком случае мы можем использовать квалификатор, чтобы сообщить Dagger, что нам нужно несколько экземпляров одного и того же класса. Реализация Qualifier по умолчанию использует аннотацию @Named, например, @Named ("student_vamsi") и @Named ("student_krishna").
+     Если мы хотим создать настраиваемый квалификатор, мы будем использовать @Qualifier для объявления интерфейса настраиваемого квалификатора.
 -   **What is the use-case of @Inject Annotation in Dagger?**<br/>
-    A) @Inject annotation is used to request dagger to provide the respective Object. We use @Inject on Constructor, Fields (mostly where constructor is not accessible like Activities, Fragments, etc.) and Methods.
-
+    A) Аннотация @Inject используется для запроса Dagger для предоставления соответствующего объекта. Мы используем @Inject в конструкторе, полях (в основном там, где конструктор недоступен, например, действиях, фрагментах и т. Д.) И методах.
 ### RxJava Related Questions:
 
 More additional info to get started with RxJava is available at:
 [Getting Started with RxJava2](https://www.coderefer.com/rxandroid-tutorial-getting-started/)
 
 -   **What is an Observable in RXJava2?**<br/>
-    A) An Observable  simply emits the data to those which subscribed to it. All the emission is done asynchronously to the subscribers. A simple Observable can be created as follows:
-
+    A) Observable просто передает данные тем, кто на него подписался. Вся эмиссия осуществляется асинхронно подписчикам. Простой Observable можно создать следующим образом:
     ```java
     // RxAndroid Tutorial - Adding Observable
     Observable<String> stringObservable = Observable.just("Hello Reactive Programming!");
     ```
 -   **What is an Observer in RXJava2?**<br/>
-    A) Observer consumes the data emitted by the Observable. To do this, Observer needs to subscribe to the Observable. Example shows how to create an Observable in RxJava2.
+    A) Observer потребляет данные, передаваемые Observable. Для этого Observer должен подписаться на Observable. Пример показывает, как создать Observable в RxJava2.    
     ```java
     // RxAndroid Tutorial - Adding observer
     Observer<String> stringObserver = new Observer<String>() {
@@ -382,7 +393,7 @@ More additional info to get started with RxJava is available at:
     ```
 
 -   **How to Subscribe / Unsubscribe in RXJava?**<br/>
-    A) We can make an Observer to subscribe to Observable as follows:
+    A) Мы можем заставить Observer подписаться на Observable следующим образом:
     ```java
     // RxAndroid tutorial - observer subscribing to observable
     stringObservable.subscribe(stringObserver);
@@ -396,27 +407,20 @@ More additional info to get started with RxJava is available at:
     5) Flowable
 
 -   **What is a Single in RxJava?**<br/>
-    A) A Single in RxJava is an Observable which emits only one item if completed or returns error.
-
+    A) Single в RxJava - это Observable, который выдает только один элемент, если завершен, или возвращает ошибку.
 -   **What is Maybe in RxJava?** <br/>
-    A) A Maybe in RxJava is used when the Observable needs to emit a value or a no value or an error.
-
+    A) A Maybe в RxJava используется, когда Observable необходимо выдать значение, отсутствие значения или ошибку.
 -   **What is Completable in RxJava?** <br/>
-    A) A Completable in RxJava is an Observable which just completes the task and does not emit anything if completed. It returns an error if anything fails.
-    It is similar to reactive concept of runnable.
-
+    A) Completable в RxJava - это Observable, который просто выполняет задачу и ничего не генерирует, если завершено. Он возвращает ошибку, если что-то не получается.
+     Это похоже на реактивную концепцию runnable.
 -   **What is Back Pressure in RxJava?**<br/>
-    A) Back Pressure is the state where your observable (publisher) is creating more events than your subscriber can handle.
-
+    A) Обратное давление - это состояние, при котором ваш наблюдаемый (publisher) создает больше событий, чем может обработать ваш подписчик.
 -   **What is Flowable in RxJava?** <br/>
-    A) A Flowable in RxJava is used when the Observable emits more data than the Observer can consume. In Other words, Flowable can handle back pressure where as an Observable cannot.
-
+    A) Flowable в RxJava используется, когда Observable испускает больше данных, чем Observer может принять. Другими словами, Flowable может справиться с противодавлением, а Observable - нет.
 -   **What is a Cold Observable?**<br/>
-    A) A Cold Observable is an Observable that does not emit items until a Subscriber subscribes. If we have more than one Subscriber, then the Cold Observable will emit each sequence of items to all Subscribers one by one.
-
+    A) Холодный Observable - это Observable, который не испускает элементы, пока подписчик не подпишется. Если у нас более одного подписчика, Cold Observable будет отправлять каждую последовательность элементов всем подписчикам один за другим.
 -   **What is a Hot Observable?**<br/>
-    A) A Hot observable is an Observer that will emit items
-
+    A) Горячий наблюдаемый - это Наблюдатель, который будет испускать предметы.
 -   **Hot Observables vs Cold Observables**<br/>
 
 
