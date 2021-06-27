@@ -10,6 +10,7 @@ Quick Jump to Topics:
  * [Kotlin Interview Questions](/kotlin/README.md)
  * [Dagger](#dagger-2-related-questions)
  * [RxJava](#rxjava-related-questions)
+ * [Kotlin](#kotlin)
 
 ### Core Android
 
@@ -425,4 +426,63 @@ More additional info to get started with RxJava is available at:
 
 
 
--   **Explain about reactive programming?**<br/>
+### Kotlin
+      
+- **infix функции**      
+      <img src="https://user-images.githubusercontent.com/56442323/123546026-af6fb580-d763-11eb-80b6-db3c32589c5d.png" alt="drawing" width="400"/>  
+      Используется для пар ``“sdk” to “df”``
+      
+- **val** - не меняется именно ссылка
+
+- **Nullable**       
+      elvis: ``val l = b?.length ?: -1`` - присвой, если не null       
+      !! operator: the not-null assertion operator - конвертирует в not null или бросает exeption       
+
+- **for loop**  
+      ``for (index in indexes)        
+        for (index in 1...3)``
+
+- **swith -> when**        
+      в case можно указать диапазон   
+      или тип
+      
+- **filter** и прочее для колекций    
+      ``list.filter{ it.length > 3 }.groupBy{ it.lenght }`` - это лямбда
+      
+- **Collections**   
+      ``val ar: Array = arrayOfInt(1, 2, 3)``
+      
+- **Classes**   
+      init, constructor
+      
+- **open** - модификатор, чтобы можно было переопределять класс/метод. Классы по умолчанию public final
+      
+- **data class**   
+      Класс, в котором данные из конструктора сразу присваиваются всем полям + генерируются гетер/сетер, функции equals, hashcode, copy, toString
+      
+- **sealed class** - прокаченный enum, чтобы задать некую иерархию наследования, делать по статусам. Под капотом - абстрактный класс джавы      
+      <img src="https://user-images.githubusercontent.com/56442323/123546901-3ffbc500-d767-11eb-9dde-1435d709d55d.png" alt="drawing" width="400"/>     
+      от него наследуются какие-то другие классы и потом через when какой-то создается
+      
+- **модификаторы доступа**      
+      <img src="https://user-images.githubusercontent.com/56442323/123547741-a0d8cc80-d76a-11eb-82f2-d6d351544918.png" alt="drawing" width="400"/>        
+      
+- **extentions** - в любом классе можно переопределить любой публичный метод, по капотом static метод     
+      <img src="https://user-images.githubusercontent.com/56442323/123547854-15ac0680-d76b-11eb-909a-629c66ff93f1.png" alt="drawing" width="400"/>        
+
+- **лямбды**      
+      <img src="https://user-images.githubusercontent.com/56442323/123547994-ad115980-d76b-11eb-99e5-8810200d1785.png" alt="drawing" width="400"/>        
+      return -> invoke    
+      return@ -> return из внешней функции
+      доступ к внешним переменным  
+      
+- **сравнения**     
+      == - как equals     
+      === - сравнение по значению в ссылке    
+      
+- **Доп классы**     
+      Unit - аналог void    
+      Nothing - его нельзя создать, используется для функций, которые ничего не вернут, например, кидают exeption или уходят в бесконечный цикл    
+      Any - аналог Object в java, обозначает любой объект     
+
+      
